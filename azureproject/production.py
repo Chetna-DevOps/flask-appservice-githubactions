@@ -8,10 +8,11 @@
 # )
 
 import os
+from urllib.parse import quote_plus
 
 DATABASE_URI = 'postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
     dbuser=os.environ['DBUSER'],
-    dbpass=os.environ['DBPASS'],
+    dbpass=quote_plus(os.environ['DBPASS']),
     dbhost=os.environ['DBHOST'],
     dbname=os.environ['DBNAME']
 )
