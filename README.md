@@ -16,11 +16,13 @@ This project starts from Microsoft's official sample app ([Azure-Samples/msdocs-
 
 ## Architecture
 
+```
 GitHub (push to main)
-→ GitHub Actions (build + deploy)
-→ Azure App Service (Flask app, Python 3.12)
-→ Azure Database for PostgreSQL (Flexible Server)
-→ Azure Cache for Redis
+   → GitHub Actions (build + deploy)
+   → Azure App Service (Flask app, Python 3.12)
+        → Azure Database for PostgreSQL (Flexible Server)
+        → Azure Cache for Redis
+```
 
 ## Application Screenshots
 
@@ -67,3 +69,6 @@ This is how the failure appeared to the end user:
 
 ### Azure Cache for Redis
 ![Redis](screenshots/redis-cache-overview.png)
+
+## Tech stack
+PostgreSQL, Redis, GitHub Actions, Azure App Service
