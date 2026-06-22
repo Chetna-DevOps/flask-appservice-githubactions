@@ -2,6 +2,10 @@
 
 A Flask + PostgreSQL + Redis web app deployed to Azure App Service using a custom CI/CD pipeline built with GitHub Actions.
 
+## Base application
+
+This project starts from Microsoft's official sample app ([Azure-Samples/msdocs-flask-postgresql-sample-app](https://github.com/Azure-Samples/msdocs-flask-postgresql-sample-app)). The application code (Flask routes, models, templates) is from this sample. Everything related to deployment — the GitHub Actions workflow, Azure resource configuration and environment variable setup was built independently.
+
 ## What this project demonstrates
 
 - Provisioning Azure resources (App Service, PostgreSQL Flexible Server, Azure Cache for Redis) manually via the Azure Portal
@@ -63,17 +67,3 @@ This is how the failure appeared to the end user:
 
 ### Azure Cache for Redis
 ![Redis](screenshots/redis-cache-overview.png)
-
-## Base application
-
-This project starts from Microsoft's official sample app ([Azure-Samples/msdocs-flask-postgresql-sample-app](https://github.com/Azure-Samples/msdocs-flask-postgresql-sample-app)). The application code (Flask routes, models, templates) is from this sample. Everything related to deployment — the GitHub Actions workflow, Azure resource configuration and environment variable setup was built independently.
-
-## Challenges debugged
-
-| Issue | Cause | Fix |
-|---|---|---|
-| Deployment failed: "No credentials found" | Basic Auth disabled by default on new App Service | Enabled Basic Auth Publishing Credentials in App Service Configuration |
-| `ModuleNotFoundError: flask_migrate` | Azure wasn't running its own build/install step | Added `SCM_DO_BUILD_DURING_DEPLOYMENT=true` app setting |
-| `RuntimeError: SQLALCHEMY_DATABASE_URI must be set` | Sample app's `production.py` was left as commented-out boilerplate | Rewrote it to build the URI from the actual environment variable names |
-| `could not translate host name "206@..."` | Database password contained `@`, breaking URL parsing | URL-encoded the password using `urllib.parse.quote_plus()` |
-| `relation "restaurant" does not exist` | Migrations never run against the Azure database | Ran `flask db upgrade` via SSH |
