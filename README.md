@@ -20,8 +20,8 @@ This project starts from Microsoft's official sample app ([Azure-Samples/msdocs-
 GitHub (push to main)
    → GitHub Actions (build + deploy)
    → Azure App Service (Flask app, Python 3.12)
-        → Azure Database for PostgreSQL (Flexible Server)
-        → Azure Cache for Redis
+   → Azure Database for PostgreSQL (Flexible Server)
+   → Azure Cache for Redis
 ```
 
 ## Application Screenshots
